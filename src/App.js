@@ -57,7 +57,10 @@ function App() {
 
 	function handleClick(index) {
 		controls.start({
-			x: index * tabWidth
+			x: index * tabWidth,
+			transition: {
+				type: "tween"
+			}
 		})
 	}
 
