@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './styles/App.module.scss'
 import { Tab } from './components/Tab'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion'
 import styled from 'styled-components'
 import * as shape from "d3-shape"
 
@@ -18,20 +18,17 @@ function App() {
 	]
 
 	const [currMenu, setCurrentMenu] = useState(0)
-	
+
 	const backgroundColor = "#464a54";
-	
+	const controls = useAnimation()
 	const tabWidth = 160
 	
-	const AnimatedSvg = styled(motion.svg)`
-		
-	`
+	const AnimatedSvg = styled(motion.svg)``
 	
 	const Path = styled(motion.path)``
 	
 	const getPath = (): string => {
 		const left = shape.line().x(d => d.x).y(d => d.y)([
-			{ x: 0, y: 0 },
 			{ x: 0, y: 0 },
 		]);
 		const tab = shape.line().x(d => d.x).y(d => d.y).curve(shape.curveBasis)([
@@ -54,13 +51,14 @@ function App() {
 		return `${left} ${tab} ${right}`;
 	};
 	const d = getPath();
-	const value = useMotionValue(0)
 
 	const x = useMotionValue(0)
 	const translateX = useTransform(x, [0, width], [-width, 0])
 
 	function handleClick(index) {
-		setCurrentMenu(index)
+		controls.start({
+			x: index * tabWidth
+		})
 	}
 
 	return (
@@ -70,6 +68,7 @@ function App() {
 				style={{
 					translateX
 				}}
+				animate={controls}
 			>
 				<Path fill={backgroundColor} {...{ d }} />
 			</AnimatedSvg>
