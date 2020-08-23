@@ -1,0 +1,20 @@
+.oneTab {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #ffffff;
+	width: 160px;
+	height: 60px;
+	font-size: 24px;
+	border: none;
+	box-shadow: none;
+	background: transparent;
+
+	&.active {
+		color: #464a54;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}

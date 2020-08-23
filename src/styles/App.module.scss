@@ -1,0 +1,16 @@
+.appContainer {
+	overflow: hidden;
+	position: relative;
+	margin-top: 40px;
+
+	.tabContainer {
+		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.margin {
+		height: 50px;
+	}
+}
